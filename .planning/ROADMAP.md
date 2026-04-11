@@ -85,8 +85,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 05-01: Update `README.md` to explain the modular layout and customization points
-- [ ] 05-02: Refresh any remaining docs or inline guidance that still assume the single-file model
+- [ ] `05-01-PLAN.md` — Rewrite `README.md` around the modular architecture and current customization surfaces
+- [ ] `05-02-PLAN.md` — Refresh help and inline guidance, then regenerate `doc/tags`
 
 ## Progress
 
