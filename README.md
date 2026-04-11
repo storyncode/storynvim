@@ -153,6 +153,25 @@ The important ownership boundaries are:
 - `lua/custom/plugins/` is the safest place to add fork-specific plugins without editing shipped files.
 - `lua/kickstart/plugins/` remains available for legacy/example opt-ins, not the main extension path.
 
+## Customization Guide
+
+Use the smallest surface that matches the change you want:
+
+- Change editor defaults, keymaps, diagnostics, or autocommands in `lua/core/`.
+- Change shipped plugin behavior in `lua/plugins/`.
+- Add fork-local plugins, overrides, or experiments in `lua/custom/plugins/`.
+
+For example:
+
+- tweak line numbers or split behavior in `lua/core/options.lua`
+- change window navigation in `lua/core/keymaps.lua`
+- adjust built-in plugin defaults in files such as `lua/plugins/editor.lua` or `lua/plugins/lsp.lua`
+- add personal plugin specs in `lua/custom/plugins/init.lua` or a new file under `lua/custom/plugins/`
+
+Treat `lua/kickstart/plugins/` as compatibility or example material carried forward
+from Kickstart. It can still be useful to browse or opt into, but it is not the
+main path for ongoing customization in this fork.
+
 
 ### Getting Started
 
@@ -162,7 +181,7 @@ The important ownership boundaries are:
 
 * What should I do if I already have a pre-existing Neovim configuration?
   * You should back it up and then delete all associated files.
-  * This includes your existing init.lua and the Neovim files in `~/.local`
+  * This includes your existing config entrypoint and the Neovim files in `~/.local`
     which can be deleted with `rm -rf ~/.local/share/nvim/`
 * Can I keep my existing configuration in parallel to StoryNvim?
   * Yes! You can use [NVIM_APPNAME](https://neovim.io/doc/user/starting.html#%24NVIM_APPNAME)`=nvim-NAME`
@@ -175,6 +194,13 @@ The important ownership boundaries are:
     config directory and the matching local directory
     `~/.local/share/nvim-storynvim`. You can apply this approach to any Neovim
     configuration that you would like to try out.
+* Where should I add my own plugins or overrides?
+  * Put fork-local changes in `lua/custom/plugins/` first.
+  * Edit `lua/plugins/` when you want to change shipped defaults that belong to the repo itself.
+  * Edit `lua/core/` for always-on editor behavior that is not plugin-specific.
+* What is `lua/kickstart/plugins/` for?
+  * It is a legacy/example namespace kept for compatibility with upstream Kickstart patterns.
+  * Prefer `lua/custom/plugins/` for new local additions in this fork.
 * What if I want to "uninstall" this configuration:
   * See [lazy.nvim uninstall](https://lazy.folke.io/usage#-uninstalling) information
 
