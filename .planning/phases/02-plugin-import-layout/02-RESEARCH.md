@@ -321,12 +321,12 @@ sh -c "rg -n \"import = 'plugins'\" lua/story/bootstrap.lua \
 |---|-------|---------|---------------|
 | A1 | Interactive regressions after the move are most likely to surface in Telescope or LSP keymap/config closures even if headless health passes. [ASSUMED] | Common Pitfalls | Medium; the planner might under-sample another moved plugin area during manual parity checks. |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Should Phase 2 wire `custom.plugins` into the active `spec` list now, or leave it as a dormant example path?**
-   - What we know: `lua/custom/plugins/init.lua` exists today, but the current inline table only contains a commented import example, and the context says `lua/custom/plugins/` should remain a user-extension space rather than the main home for shipped active specs. [VERIFIED: lua/story/bootstrap.lua] [VERIFIED: lua/custom/plugins/init.lua] [VERIFIED: .planning/phases/02-plugin-import-layout/02-CONTEXT.md]
-   - What's unclear: Whether the planner wants that namespace activated during Phase 2 for convenience or left untouched to minimize scope. [VERIFIED: .planning/phases/02-plugin-import-layout/02-CONTEXT.md]
-   - Recommendation: Leave it untouched in Phase 2 unless a tiny compatibility shim is required, because PLUG-03 and broader optional-module reconciliation are explicitly deferred to Phase 4. [VERIFIED: .planning/REQUIREMENTS.md] [VERIFIED: .planning/ROADMAP.md]
+   - Resolution: Leave `custom.plugins` untouched in Phase 2 unless a tiny compatibility shim is required.
+   - Why: The context locks `lua/custom/plugins/` as a user-extension space rather than the primary home for shipped active specs, and broader optional-module reconciliation is explicitly deferred to Phase 4 under `PLUG-03`. [VERIFIED: .planning/phases/02-plugin-import-layout/02-CONTEXT.md] [VERIFIED: .planning/REQUIREMENTS.md] [VERIFIED: .planning/ROADMAP.md]
+   - Planning implication: Phase 2 plans should move active shipped specs into `lua/plugins/`, preserve the commented/example nature of `custom.plugins`, and avoid enabling new extension behavior unless needed to prevent regression. [VERIFIED: lua/story/bootstrap.lua] [VERIFIED: lua/custom/plugins/init.lua]
 
 ## Environment Availability
 
