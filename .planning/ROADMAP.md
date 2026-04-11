@@ -70,9 +70,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 04-01: Reconcile existing `lua/kickstart/plugins` and `lua/custom/plugins` behavior with the new plugin layout
-- [ ] 04-02: Run parity-focused validation and fix regressions in core plugin workflows
-- [ ] 04-03: Remove obsolete code paths and finalize the new module boundaries
+- [ ] `04-01-PLAN.md` — Activate `custom.plugins` as the stable extension path while keeping `kickstart.plugins.*` as legacy/example opt-ins
+- [ ] `04-02-PLAN.md` — Add a reusable parity assertion module and block cleanup on interactive workflow sign-off
+- [ ] `04-03-PLAN.md` — Remove only proven duplicate bootstrap logic and finalize the post-parity startup boundaries
 
 ### Phase 5: Documentation Refresh
 **Goal**: Rewrite project guidance so the repo teaches and documents the modular layout that now exists.
