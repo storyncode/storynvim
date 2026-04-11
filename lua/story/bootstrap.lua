@@ -1,11 +1,15 @@
 local M = {}
 
+local function ensure_config_root_on_rtp(config_root)
+  vim.opt.rtp:prepend(config_root)
+end
+
 function M.setup()
   -- Core editor behavior
   local source = debug.getinfo(1, 'S').source:sub(2)
   source = vim.uv.fs_realpath(source) or source
   local config_root = vim.fs.dirname(vim.fs.dirname(vim.fs.dirname(source)))
-  vim.opt.rtp:prepend(config_root)
+  ensure_config_root_on_rtp(config_root)
 
   require('core.options').setup()
   require('core.diagnostics').setup()
@@ -82,7 +86,7 @@ function M.setup()
     },
   })
 
-  vim.opt.rtp:prepend(config_root)
+  ensure_config_root_on_rtp(config_root)
 
   -- The line beneath this is called `modeline`. See `:help modeline`
   -- vim: ts=2 sts=2 sw=2 et
