@@ -138,6 +138,10 @@ function M.setup()
     callback = function() vim.hl.on_yank() end,
   })
 
+  local source = debug.getinfo(1, 'S').source:sub(2)
+  local config_root = vim.fs.dirname(vim.fs.dirname(vim.fs.dirname(source)))
+  vim.opt.rtp:prepend(config_root)
+
   -- [[ Install `lazy.nvim` plugin manager ]]
   --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
   require('story.bootstrap.lazy').setup()
