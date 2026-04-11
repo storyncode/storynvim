@@ -16,10 +16,10 @@ The config must stay easy to reason about while moving from one giant startup fi
 - ✓ Provides modern editor defaults, keymaps, autocommands, and diagnostics behavior for daily editing — existing
 - ✓ Includes working plugin integrations for Telescope, Treesitter, LSP, completion, formatting, and optional plugin modules under `lua/kickstart/plugins/` — existing
 - ✓ Ships with local health checks and user-facing setup documentation in `lua/kickstart/health.lua`, `README.md`, and `doc/kickstart.txt` — existing
+- ✓ Phase 1 established a thin `init.lua`, ordered bootstrap module, and dedicated lazy bootstrap helper without breaking headless startup checks — validated in Phase 1: Bootstrap Skeleton
 
 ### Active
 
-- [ ] Replace the single-file startup model with a structured module layout that keeps only minimal bootstrap logic in `init.lua`
 - [ ] Move plugin registration to a `lua/plugins`-style import system so plugin specs are grouped by concern instead of embedded inline in the entrypoint
 - [ ] Split editor settings, keymaps, autocommands, and plugin-related helper logic into coherent modules with clear ownership
 - [ ] Preserve existing behavior during the migration so the refactor does not regress startup, keymaps, LSP, formatting, Telescope, or optional modules
@@ -46,10 +46,14 @@ This is a brownfield Neovim configuration derived from Kickstart.nvim. The curre
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Treat this as a brownfield refactor rather than a greenfield rewrite | Existing config behavior already works and should be preserved | — Pending |
-| Target a minimal `init.lua` plus modular Lua imports | This directly matches the desired end state and reduces future maintenance cost | — Pending |
+| Treat this as a brownfield refactor rather than a greenfield rewrite | Existing config behavior already works and should be preserved | Phase 1 kept runtime behavior intact while changing structure |
+| Target a minimal `init.lua` plus modular Lua imports | This directly matches the desired end state and reduces future maintenance cost | Phase 1 delivered the thin entrypoint plus bootstrap modules |
 | Use a `lua/plugins`-style plugin import layout | It is the clearest structural replacement for the current inline plugin table | — Pending |
 | Keep planning docs in git | The migration is multi-phase and benefits from persistent project memory | — Pending |
+
+## Current State
+
+Phase 1 is complete. `init.lua` is now a thin bootstrap entrypoint, startup ordering lives in `lua/story/bootstrap.lua`, and the risky `lazy.nvim` clone/runtimepath logic is isolated in `lua/story/bootstrap/lazy.lua`. The next step is moving the inline plugin table into a `lua/plugins` import layout.
 
 ## Evolution
 
@@ -69,4 +73,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-11 after initialization*
+*Last updated: 2026-04-11 after Phase 1 completion*

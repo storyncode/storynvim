@@ -6,7 +6,7 @@ This roadmap migrates the repo from a monolithic Kickstart-style `init.lua` to a
 
 ## Phases
 
-- [ ] **Phase 1: Bootstrap Skeleton** - Introduce the minimal entrypoint and module loading foundation
+- [x] **Phase 1: Bootstrap Skeleton** - Introduce the minimal entrypoint and module loading foundation (completed 2026-04-11)
 - [ ] **Phase 2: Plugin Import Layout** - Move plugin declarations into a structured `lua/plugins` system
 - [ ] **Phase 3: Core Module Extraction** - Split options, keymaps, and autocommands into dedicated modules
 - [ ] **Phase 4: Compatibility and Cleanup** - Reconcile optional modules and verify behavioral parity
@@ -25,9 +25,9 @@ This roadmap migrates the repo from a monolithic Kickstart-style `init.lua` to a
 **Plans**: 3 plans
 
 Plans:
-- [ ] `01-01-PLAN.md` — Define the target startup/module layout and move the ordered startup body into a bootstrap module
-- [ ] `01-02-PLAN.md` — Reduce `init.lua` to the minimal entrypoint and verify the real startup path still boots cleanly
-- [ ] `01-03-PLAN.md` — Extract the risky `lazy.nvim` bootstrap into a shared helper and rerun the smoke suite
+- [x] `01-01-PLAN.md` — Define the target startup/module layout and move the ordered startup body into a bootstrap module
+- [x] `01-02-PLAN.md` — Reduce `init.lua` to the minimal entrypoint and verify the real startup path still boots cleanly
+- [x] `01-03-PLAN.md` — Extract the risky `lazy.nvim` bootstrap into a shared helper and rerun the smoke suite
 
 ### Phase 2: Plugin Import Layout
 **Goal**: Replace the inline plugin table with a `lua/plugins`-style import system organized by concern.
@@ -95,7 +95,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Bootstrap Skeleton | 0/3 | Not started | - |
+| 1. Bootstrap Skeleton | 3/3 | Complete | 2026-04-11 |
 | 2. Plugin Import Layout | 0/3 | Not started | - |
 | 3. Core Module Extraction | 0/3 | Not started | - |
 | 4. Compatibility and Cleanup | 0/3 | Not started | - |

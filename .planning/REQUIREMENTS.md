@@ -7,9 +7,9 @@
 
 ### Bootstrap
 
-- [ ] **BOOT-01**: `init.lua` contains only minimal startup orchestration for leader setup, runtime bootstrap, and module entrypoints
-- [ ] **BOOT-02**: `lazy.nvim` bootstrap remains functional after the refactor
-- [ ] **BOOT-03**: Module loading order preserves required early globals and runtimepath setup
+- [x] **BOOT-01**: `init.lua` contains only minimal startup orchestration for leader setup, runtime bootstrap, and module entrypoints
+- [x] **BOOT-02**: `lazy.nvim` bootstrap remains functional after the refactor
+- [x] **BOOT-03**: Module loading order preserves required early globals and runtimepath setup
 
 ### Plugin Structure
 
@@ -53,9 +53,9 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| BOOT-01 | Phase 1 | Pending |
-| BOOT-02 | Phase 1 | Pending |
-| BOOT-03 | Phase 1 | Pending |
+| BOOT-01 | Phase 1 | Complete |
+| BOOT-02 | Phase 1 | Complete |
+| BOOT-03 | Phase 1 | Complete |
 | PLUG-01 | Phase 2 | Pending |
 | PLUG-02 | Phase 2 | Pending |
 | PLUG-03 | Phase 4 | Pending |
@@ -75,4 +75,4 @@
 
 ---
 *Requirements defined: 2026-04-11*
-*Last updated: 2026-04-11 after initial definition*
+*Last updated: 2026-04-11 after Phase 1 completion*
