@@ -55,9 +55,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 03-01: Extract options and global settings into core configuration modules
-- [ ] 03-02: Extract keymaps into dedicated modules with the same current behavior
-- [ ] 03-03: Extract autocommands and helper setup into dedicated modules
+- [ ] `03-01-PLAN.md` — Extract always-on options and diagnostics into dedicated `lua/core/` modules while keeping runtime clipboard/bootstrap behavior in `lua/story/bootstrap.lua`
+- [ ] `03-02-PLAN.md` — Extract always-on global keymaps into `lua/core/keymaps.lua` and keep plugin-local mappings in plugin ownership
+- [ ] `03-03-PLAN.md` — Extract always-on autocmds into `lua/core/autocmds.lua` and finalize bootstrap as the explicit core-versus-runtime orchestrator
 
 ### Phase 4: Compatibility and Cleanup
 **Goal**: Ensure the new structure preserves existing behavior and that optional modules fit the new architecture cleanly.
