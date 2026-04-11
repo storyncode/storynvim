@@ -15,24 +15,24 @@
 
 - [x] **PLUG-01**: Plugin declarations are moved out of the monolithic `init.lua` into a `lua/plugins`-style import structure
 - [x] **PLUG-02**: Plugin specs are grouped by concern so related plugins can be found and edited without scanning the whole config
-- [ ] **PLUG-03**: Existing optional plugin modules remain compatible or are migrated consistently into the new structure
+- [x] **PLUG-03**: Existing optional plugin modules remain compatible or are migrated consistently into the new structure
 
 ### Core Config
 
-- [ ] **CORE-01**: Editor options are defined in dedicated modules instead of inline in `init.lua`
-- [ ] **CORE-02**: Keymaps are defined in dedicated modules instead of inline in `init.lua`
-- [ ] **CORE-03**: Autocommands and other startup helpers are defined in dedicated modules instead of inline in `init.lua`
+- [x] **CORE-01**: Editor options are defined in dedicated modules instead of inline in `init.lua`
+- [x] **CORE-02**: Keymaps are defined in dedicated modules instead of inline in `init.lua`
+- [x] **CORE-03**: Autocommands and other startup helpers are defined in dedicated modules instead of inline in `init.lua`
 
 ### Behavioral Parity
 
-- [ ] **PAR-01**: Core editing behavior remains unchanged from the user perspective after the migration
-- [ ] **PAR-02**: LSP, completion, formatting, Treesitter, and Telescope still load and work after the migration
-- [ ] **PAR-03**: Health checks and optional plugin modules still load correctly after the migration
+- [x] **PAR-01**: Core editing behavior remains unchanged from the user perspective after the migration
+- [x] **PAR-02**: LSP, completion, formatting, Treesitter, and Telescope still load and work after the migration
+- [x] **PAR-03**: Health checks and optional plugin modules still load correctly after the migration
 
 ### Documentation
 
-- [ ] **DOC-01**: Repository documentation describes the modular layout and where to customize the config
-- [ ] **DOC-02**: The repo no longer presents the single-file layout as the intended architecture for this fork
+- [x] **DOC-01**: Repository documentation describes the modular layout and where to customize the config
+- [x] **DOC-02**: The repo no longer presents the single-file layout as the intended architecture for this fork
 
 ## v2 Requirements
 
@@ -58,15 +58,15 @@
 | BOOT-03 | Phase 1 | Complete |
 | PLUG-01 | Phase 2 | Complete |
 | PLUG-02 | Phase 2 | Complete |
-| PLUG-03 | Phase 4 | Pending |
-| CORE-01 | Phase 3 | Pending |
-| CORE-02 | Phase 3 | Pending |
-| CORE-03 | Phase 3 | Pending |
-| PAR-01 | Phase 4 | Pending |
-| PAR-02 | Phase 4 | Pending |
-| PAR-03 | Phase 4 | Pending |
-| DOC-01 | Phase 5 | Pending |
-| DOC-02 | Phase 5 | Pending |
+| PLUG-03 | Phase 4 | Complete |
+| CORE-01 | Phase 3 | Complete |
+| CORE-02 | Phase 3 | Complete |
+| CORE-03 | Phase 3 | Complete |
+| PAR-01 | Phase 4 | Complete |
+| PAR-02 | Phase 4 | Complete |
+| PAR-03 | Phase 4 | Complete |
+| DOC-01 | Phase 5 | Complete |
+| DOC-02 | Phase 5 | Complete |
 
 **Coverage:**
 - v1 requirements: 14 total
@@ -75,4 +75,4 @@
 
 ---
 *Requirements defined: 2026-04-11*
-*Last updated: 2026-04-11 after Phase 1 completion*
+*Last updated: 2026-04-11 after Phase 5 completion*

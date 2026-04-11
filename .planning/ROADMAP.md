@@ -10,7 +10,7 @@ This roadmap migrates the repo from a monolithic Kickstart-style `init.lua` to a
 - [x] **Phase 2: Plugin Import Layout** - Move plugin declarations into a structured `lua/plugins` system (completed 2026-04-11)
 - [x] **Phase 3: Core Module Extraction** - Split options, keymaps, and autocommands into dedicated modules (completed 2026-04-11)
 - [x] **Phase 4: Compatibility and Cleanup** - Reconcile optional modules and verify behavioral parity (completed 2026-04-11)
-- [ ] **Phase 5: Documentation Refresh** - Update repo guidance to reflect the new modular architecture
+- [x] **Phase 5: Documentation Refresh** - Update repo guidance to reflect the new modular architecture (completed 2026-04-11)
 
 ## Phase Details
 
@@ -85,8 +85,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] `05-01-PLAN.md` — Rewrite `README.md` around the modular architecture and current customization surfaces
-- [ ] `05-02-PLAN.md` — Refresh help and inline guidance, then regenerate `doc/tags`
+- [x] `05-01-PLAN.md` — Rewrite `README.md` around the modular architecture and current customization surfaces
+- [x] `05-02-PLAN.md` — Refresh help and inline guidance, then regenerate `doc/tags`
 
 ## Progress
 
@@ -99,4 +99,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 2. Plugin Import Layout | 3/3 | Complete | 2026-04-11 |
 | 3. Core Module Extraction | 3/3 | Complete | 2026-04-11 |
 | 4. Compatibility and Cleanup | 3/3 | Complete | 2026-04-11 |
-| 5. Documentation Refresh | 0/2 | Not started | - |
+| 5. Documentation Refresh | 2/2 | Complete | 2026-04-11 |
