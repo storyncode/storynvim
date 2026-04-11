@@ -210,12 +210,12 @@ nvim --headless -u NONE -i NONE '+helptags doc' +qall
 | A1 | `grep -R` is a viable fallback if `rg` is unavailable on the execution machine. [ASSUMED] | Environment Availability | Low; planner may need to swap one structural audit command if `rg` is missing. |
 | A2 | Keeping the existing `kickstart.nvim` help topic stable is the safer default unless the user explicitly wants broader rebranding. [ASSUMED] | Open Questions | Medium; planner could under-scope help-tag changes if the user expects a renamed help topic in this phase. |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Should Phase 5 change the help tag identity or keep `kickstart.nvim` as the help topic?**
    - What we know: The phase explicitly defers broad runtime rebranding, `doc/kickstart.txt` currently publishes `*kickstart.nvim*`, and `lua/kickstart/health.lua` still starts health output as `kickstart.nvim`. [VERIFIED: .planning/phases/05-documentation-refresh/05-CONTEXT.md] [VERIFIED: doc/kickstart.txt] [VERIFIED: lua/kickstart/health.lua]
    - What's unclear: Whether the planner should keep the help topic stable for compatibility and only modernize the prose, or also introduce a new alias tag. [VERIFIED: doc/tags] [ASSUMED]
-   - Recommendation: Default to keeping the existing help tag/topic stable in this docs phase and limit changes to prose unless the user explicitly wants a broader rebrand. [VERIFIED: .planning/phases/05-documentation-refresh/05-CONTEXT.md] [ASSUMED]
+   - Resolution: Keep the existing help tag/topic stable in this docs phase and limit changes to prose unless the user explicitly wants a broader rebrand. [VERIFIED: .planning/phases/05-documentation-refresh/05-CONTEXT.md] [ASSUMED]
 
 ## Environment Availability
 
