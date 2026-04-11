@@ -33,16 +33,21 @@ function M.setup()
   --
   -- NOTE: Here is where you install your plugins.
   require('lazy').setup({
-    spec = { { import = 'plugins' } },
+    spec = {
+      { import = 'plugins' },
+      { import = 'custom.plugins' },
+    },
 
     -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
     -- init.lua. If you want these files, they are in the repository, so you can just download them and
     -- place them in the correct locations.
 
-    -- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for Kickstart
+    -- NOTE: `lua/custom/plugins/*.lua` is the stable user extension path for adding your own plugins,
+    -- configuration, and overrides without changing the shipped `lua/plugins` source of truth.
     --
-    --  Here are some example plugins that I've included in the Kickstart repository.
-    --  Uncomment any of the lines below to enable them (you will need to restart nvim).
+    -- NOTE: `lua/kickstart/plugins/*.lua` remains a legacy/example opt-in surface from the Kickstart repo.
+    --
+    --  Uncomment any of the example lines below to enable them (you will need to restart nvim).
     --
     -- require 'kickstart.plugins.debug',
     -- require 'kickstart.plugins.indent_line',
@@ -51,12 +56,6 @@ function M.setup()
     -- require 'kickstart.plugins.neo-tree',
     -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommended keymaps
 
-    -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-    --    This is the easiest way to modularize your config.
-    --
-    --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-    -- { import = 'custom.plugins' },
-    --
     -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
     -- Or use telescope!
     -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
