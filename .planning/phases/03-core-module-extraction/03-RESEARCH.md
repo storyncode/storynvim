@@ -290,12 +290,12 @@ return M
 
 All claims in this research were verified or cited — no user confirmation needed.
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Should diagnostics live in `keymaps.lua` or a separate `diagnostics.lua`?**
-   - What we know: The phase decisions allow extra small modules, and diagnostics config plus the quickfix keymap are currently adjacent in bootstrap. [VERIFIED: lua/story/bootstrap.lua] [VERIFIED: .planning/phases/03-core-module-extraction/03-CONTEXT.md]
-   - What's unclear: Whether the planner prefers the smallest file count or the clearest concern split.
-   - Recommendation: Plan for a dedicated `lua/core/diagnostics.lua`; collapse later only if the implementation stays equally readable. [VERIFIED: .planning/phases/03-core-module-extraction/03-CONTEXT.md]
+   - Resolution: Use a dedicated `lua/core/diagnostics.lua`.
+   - Basis: D-01 permits additional small modules when they improve clarity, and the diagnostics config plus `<leader>q` quickfix mapping form a coherent always-on diagnostics concern distinct from general keymaps. [VERIFIED: .planning/phases/03-core-module-extraction/03-CONTEXT.md] [VERIFIED: lua/story/bootstrap.lua]
+   - Planning consequence: Plan `03-01` owns `lua/core/diagnostics.lua`, while Plan `03-02` keeps `lua/core/keymaps.lua` limited to the remaining global non-plugin mappings. [VERIFIED: .planning/phases/03-core-module-extraction/03-01-PLAN.md] [VERIFIED: .planning/phases/03-core-module-extraction/03-02-PLAN.md]
 
 ## Environment Availability
 

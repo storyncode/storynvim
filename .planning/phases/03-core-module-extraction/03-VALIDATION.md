@@ -39,8 +39,8 @@ created: 2026-04-11
 | Task ID | Plan | Wave | Requirement | Threat Ref | Secure Behavior | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|------------|-----------------|-----------|-------------------|-------------|--------|
 | 03-01-01 | 01 | 1 | CORE-01 | T-03-01 | Options remain explicitly defined in repo-owned modules without changing startup values | smoke | `nvim --headless -u ./init.lua "+lua assert(vim.o.number == true and vim.o.signcolumn == 'yes' and vim.o.scrolloff == 10)" +qa` | ✅ | ⬜ pending |
-| 03-02-01 | 02 | 1 | CORE-02 | T-03-01 | Global non-plugin mappings remain registered with the same RHS values | smoke | `nvim --headless -u ./init.lua "+lua local esc=vim.fn.maparg('<Esc>', 'n', false, true); local left=vim.fn.maparg('<C-h>', 'n', false, true); assert(esc.rhs == '<Cmd>nohlsearch<CR>' or esc.rhs == '<cmd>nohlsearch<CR>'); assert(left.rhs == '<C-w><C-h>')" +qa` | ✅ | ⬜ pending |
-| 03-03-01 | 03 | 2 | CORE-03 | T-03-01 | Always-on autocmds still register and startup helpers still complete under headless startup | smoke | `nvim --headless -u ./init.lua "+lua local ac=vim.api.nvim_get_autocmds({group='kickstart-highlight-yank'}); assert(#ac > 0)" "+checkhealth kickstart" +qa` | ✅ | ⬜ pending |
+| 03-02-01 | 02 | 2 | CORE-02 | T-03-01 | Global non-plugin mappings remain registered with the same RHS values | smoke | `nvim --headless -u ./init.lua "+lua local esc=vim.fn.maparg('<Esc>', 'n', false, true); local left=vim.fn.maparg('<C-h>', 'n', false, true); assert(esc.rhs == '<Cmd>nohlsearch<CR>' or esc.rhs == '<cmd>nohlsearch<CR>'); assert(left.rhs == '<C-w><C-h>')" +qa` | ✅ | ⬜ pending |
+| 03-03-01 | 03 | 3 | CORE-03 | T-03-01 | Always-on autocmds still register and startup helpers still complete under headless startup | smoke | `nvim --headless -u ./init.lua "+lua local ac=vim.api.nvim_get_autocmds({group='kickstart-highlight-yank'}); assert(#ac > 0)" "+checkhealth kickstart" +qa` | ✅ | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
