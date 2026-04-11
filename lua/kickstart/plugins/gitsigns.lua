@@ -6,6 +6,7 @@
 ---@type LazySpec
 return {
   'lewis6991/gitsigns.nvim',
+  optional = true,
   ---@module 'gitsigns'
   ---@type Gitsigns.Config
   ---@diagnostic disable-next-line: missing-fields
