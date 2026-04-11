@@ -35,23 +35,16 @@ function M.setup()
   --  To update plugins you can run
   --    :Lazy update
   --
-  -- NOTE: Here is where you install your plugins.
   require('lazy').setup({
     spec = {
       { import = 'plugins' },
       { import = 'custom.plugins' },
     },
 
-    -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
-    -- init.lua. If you want these files, they are in the repository, so you can just download them and
-    -- place them in the correct locations.
-
     -- NOTE: `lua/custom/plugins/*.lua` is the stable user extension path for adding your own plugins,
     -- configuration, and overrides without changing the shipped `lua/plugins` source of truth.
     --
     -- NOTE: `lua/kickstart/plugins/*.lua` remains a legacy/example opt-in surface from the Kickstart repo.
-    --
-    --  Uncomment any of the example lines below to enable them (you will need to restart nvim).
     --
     -- require 'kickstart.plugins.debug',
     -- require 'kickstart.plugins.indent_line',
