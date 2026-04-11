@@ -231,17 +231,17 @@ The last two commands were verified locally and exited successfully in this repo
 | A2 | UI icon regressions will be visibly noticeable if `have_nerd_font` ordering changes | Common Pitfalls | Low; behavior still remains functionally correct but visual parity may drift |
 | A3 | Phase-boundary creep is likely during implementation | Common Pitfalls | Low; this affects planning discipline more than runtime correctness |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **What namespace should own the new bootstrap module?**
    What we know: The repo already has `kickstart` and `custom` namespaces, and Phase 1 needs one new stable namespace for extracted startup code. [VERIFIED: codebase grep]
-   What's unclear: Whether the planner should preserve upstream naming or introduce a fork-specific namespace such as `story`. [VERIFIED: codebase grep]
-   Recommendation: Pick one namespace in Plan 01-01 and keep all new Phase 1 files under it so future phases do not mix concerns. [VERIFIED: roadmap]
+   Resolution: Use the fork-specific `story` namespace so the new bootstrap path is clearly this repo's architecture rather than an upstream Kickstart teaching namespace. [VERIFIED: 01-01-PLAN frontmatter and context]
+   Outcome: Phase 1 should create and extend `lua/story/bootstrap.lua`, and later phases should keep new modularization work under `lua/story/`. [VERIFIED: roadmap]
 
 2. **Should always-on options/keymaps/autocmds stay inline in the bootstrap module for Phase 1 or move to placeholder submodules now?**
    What we know: The roadmap reserves dedicated extraction of options, keymaps, and autocommands for Phase 3. [VERIFIED: roadmap]
-   What's unclear: Whether creating empty future-facing files in Phase 1 helps or just adds noise. [VERIFIED: roadmap]
-   Recommendation: Keep them inline inside the bootstrap module unless a tiny helper is genuinely shared; avoid pre-emptive fragmentation. [VERIFIED: roadmap]
+   Resolution: Keep the always-on options, keymaps, and autocommands inline inside `lua/story/bootstrap.lua` during Phase 1 unless a tiny helper is genuinely required for the `lazy.nvim` bootstrap path. [VERIFIED: 01-01-PLAN and 01-02-PLAN]
+   Outcome: Phase 1 stays within BOOT-01 through BOOT-03 by creating one ordered bootstrap boundary now and deferring concern-based extraction to Phase 3. [VERIFIED: roadmap]
 
 ## Environment Availability
 

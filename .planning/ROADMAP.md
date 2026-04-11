@@ -25,9 +25,9 @@ This roadmap migrates the repo from a monolithic Kickstart-style `init.lua` to a
 **Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: Define the target startup/module layout and move early bootstrap logic into a core entry module
-- [ ] 01-02: Reduce `init.lua` to minimal bootstrap code and verify startup dependencies still happen in the right order
-- [ ] 01-03: Add any shared helpers required for the modular startup path
+- [ ] `01-01-PLAN.md` — Define the target startup/module layout and move the ordered startup body into a bootstrap module
+- [ ] `01-02-PLAN.md` — Reduce `init.lua` to the minimal entrypoint and verify the real startup path still boots cleanly
+- [ ] `01-03-PLAN.md` — Extract the risky `lazy.nvim` bootstrap into a shared helper and rerun the smoke suite
 
 ### Phase 2: Plugin Import Layout
 **Goal**: Replace the inline plugin table with a `lua/plugins`-style import system organized by concern.
