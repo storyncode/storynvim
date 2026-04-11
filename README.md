@@ -1,14 +1,16 @@
-# kickstart.nvim
+# StoryNvim
 
 ## Introduction
 
-A starting point for Neovim that is:
+A modular Neovim configuration fork built on Kickstart.nvim.
 
-* Small
-* Single-file
-* Completely Documented
+This repo keeps the practical "fork it and make it yours" workflow, but the runtime
+is no longer organized around one giant `init.lua`. Startup now flows through a
+thin entrypoint into focused Lua modules so you can find editor behavior, shipped
+plugin configuration, and fork-local extensions without reverse-engineering a
+monolith.
 
-**NOT** a Neovim distribution, but instead a starting point for your configuration.
+Use it as a personal config, or fork it as a base for your own setup.
 
 ## Installation
 
@@ -46,7 +48,7 @@ External Requirements:
 > See [Install Recipes](#Install-Recipes) for additional Windows and Linux specific notes
 > and quick install snippets
 
-### Install Kickstart
+### Install StoryNvim
 
 > [!NOTE]
 > [Backup](#FAQ) your previous configuration (if any exists)
@@ -67,22 +69,22 @@ fork to your machine using one of the commands below, depending on your OS.
 
 > [!NOTE]
 > Your fork's URL will be something like this:
-> `https://github.com/<your_github_username>/kickstart.nvim.git`
+> `https://github.com/<your_github_username>/storynvim.git`
 
 You likely want to remove `lazy-lock.json` from your fork's `.gitignore` file
-too - it's ignored in the kickstart repo to make maintenance easier, but it's
+too - it's ignored in the upstream Kickstart repo to make maintenance easier, but it's
 [recommended to track it in version control](https://lazy.folke.io/usage/lockfile).
 
-#### Clone kickstart.nvim
+#### Clone StoryNvim
 
 > [!NOTE]
 > If following the recommended step above (i.e., forking the repo), replace
-> `nvim-lua` with `<your_github_username>` in the commands below
+> `storyncode` with `<your_github_username>` in the commands below
 
 <details><summary> Linux and Mac </summary>
 
 ```sh
-git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+git clone https://github.com/storyncode/storynvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 ```
 
 </details>
@@ -92,13 +94,13 @@ git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HO
 If you're using `cmd.exe`:
 
 ```
-git clone https://github.com/nvim-lua/kickstart.nvim.git "%localappdata%\nvim"
+git clone https://github.com/storyncode/storynvim.git "%localappdata%\nvim"
 ```
 
 If you're using `powershell.exe`
 
 ```
-git clone https://github.com/nvim-lua/kickstart.nvim.git "${env:LOCALAPPDATA}\nvim"
+git clone https://github.com/storyncode/storynvim.git "${env:LOCALAPPDATA}\nvim"
 ```
 
 </details>
@@ -114,14 +116,42 @@ nvim
 That's it! Lazy will install all the plugins you have. Use `:Lazy` to view
 the current plugin status. Hit `q` to close the window.
 
-#### Read The Friendly Documentation
+#### Read The Runtime Layout
 
-Read through the `init.lua` file in your configuration folder for more
-information about extending and exploring Neovim. That also includes
-examples of adding popularly requested plugins.
+Start with `README.md`, then browse the module that matches what you want to
+change:
+
+- `init.lua` is a thin entrypoint that sets early globals and calls `require('story.bootstrap').setup()`
+- `lua/story/` owns startup orchestration and plugin-manager bootstrap
+- `lua/core/` owns always-on editor behavior like options, keymaps, diagnostics, and autocmds
+- `lua/plugins/` owns shipped plugin specs and configuration
+- `lua/custom/plugins/` is the stable fork-local path for your own plugins and overrides
+
+If you want to learn how a specific feature works, open the relevant module
+instead of treating `init.lua` as the main customization surface.
 
 > [!NOTE]
 > For more information about a particular plugin check its repository's documentation.
+
+## Architecture
+
+```text
+init.lua
+└── require('story.bootstrap').setup()
+    ├── lua/story/                  startup orchestration and lazy.nvim bootstrap
+    ├── lua/core/                   always-on editor behavior
+    ├── lua/plugins/                shipped plugin behavior
+    ├── lua/custom/plugins/         fork-local plugins and overrides
+    └── lua/kickstart/plugins/      legacy/example opt-in modules
+```
+
+The important ownership boundaries are:
+
+- `init.lua` stays intentionally small so startup is easy to follow.
+- `lua/core/` is where you change editor-wide behavior that should always load.
+- `lua/plugins/` is where the repo's shipped plugin behavior lives.
+- `lua/custom/plugins/` is the safest place to add fork-specific plugins without editing shipped files.
+- `lua/kickstart/plugins/` remains available for legacy/example opt-ins, not the main extension path.
 
 
 ### Getting Started
@@ -134,29 +164,19 @@ examples of adding popularly requested plugins.
   * You should back it up and then delete all associated files.
   * This includes your existing init.lua and the Neovim files in `~/.local`
     which can be deleted with `rm -rf ~/.local/share/nvim/`
-* Can I keep my existing configuration in parallel to kickstart?
+* Can I keep my existing configuration in parallel to StoryNvim?
   * Yes! You can use [NVIM_APPNAME](https://neovim.io/doc/user/starting.html#%24NVIM_APPNAME)`=nvim-NAME`
-    to maintain multiple configurations. For example, you can install the kickstart
-    configuration in `~/.config/nvim-kickstart` and create an alias:
+    to maintain multiple configurations. For example, you can install this
+    configuration in `~/.config/nvim-storynvim` and create an alias:
     ```
-    alias nvim-kickstart='NVIM_APPNAME="nvim-kickstart" nvim'
+    alias nvim-story='NVIM_APPNAME="nvim-storynvim" nvim'
     ```
-    When you run Neovim using `nvim-kickstart` alias it will use the alternative
+    When you run Neovim using the alias it will use the alternative
     config directory and the matching local directory
-    `~/.local/share/nvim-kickstart`. You can apply this approach to any Neovim
-    distribution that you would like to try out.
+    `~/.local/share/nvim-storynvim`. You can apply this approach to any Neovim
+    configuration that you would like to try out.
 * What if I want to "uninstall" this configuration:
   * See [lazy.nvim uninstall](https://lazy.folke.io/usage#-uninstalling) information
-* Why is the kickstart `init.lua` a single file? Wouldn't it make sense to split it into multiple files?
-  * The main purpose of kickstart is to serve as a teaching tool and a reference
-    configuration that someone can easily use to `git clone` as a basis for their own.
-    As you progress in learning Neovim and Lua, you might consider splitting `init.lua`
-    into smaller parts. A fork of kickstart that does this while maintaining the
-    same functionality is available here:
-    * [kickstart-modular.nvim](https://github.com/dam9000/kickstart-modular.nvim)
-  * Discussions on this topic can be found here:
-    * [Restructure the configuration](https://github.com/nvim-lua/kickstart.nvim/issues/218)
-    * [Reorganize init.lua into a multi-file setup](https://github.com/nvim-lua/kickstart.nvim/pull/473)
 
 ### Install Recipes
 
