@@ -40,9 +40,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 02-01: Create the plugin namespace and move the base plugin list into imported spec files
-- [ ] 02-02: Group plugin specs by concern and preserve current lazy-loading/config hooks
-- [ ] 02-03: Remove the old inline plugin table once imports fully cover active plugins
+- [ ] `02-01-PLAN.md` — Create the editor and Telescope concern modules under `lua/plugins/`
+- [ ] `02-02-PLAN.md` — Create the LSP, coding, and UI concern modules under `lua/plugins/`
+- [ ] `02-03-PLAN.md` — Switch `lazy.setup` to `import = 'plugins'`, remove the inline plugin table, and rerun smoke checks
 
 ### Phase 3: Core Module Extraction
 **Goal**: Move non-plugin editor behavior out of `init.lua` into dedicated modules with clear boundaries.
