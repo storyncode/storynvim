@@ -285,17 +285,13 @@ This command exercises the real entrypoint, lazy registry, legacy modules, a Vim
 | A2 | Rewriting all legacy modules into `lua/plugins` during Phase 4 would add unnecessary churn in most cases. [ASSUMED] | Standard Stack | Medium. If a legacy module is structurally incompatible, the plan may need a targeted migration task. |
 | A3 | A custom compatibility loader would be worse than using `lazy.nvim` composition. [ASSUMED] | Don't Hand-Roll | Medium. If the repo exposes an undocumented edge case, the plan may need a thinner adapter than expected. |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Should Phase 4 uncomment `{ import = 'custom.plugins' }` permanently or only validate that it can be enabled safely?**
-   What we know: `lua/custom/plugins/init.lua` exists and returns an empty `LazySpec`, and Phase 4 decisions lock `custom.plugins` as the stable user extension path. [VERIFIED: lua/custom/plugins/init.lua] [VERIFIED: .planning/phases/04-compatibility-and-cleanup/04-CONTEXT.md]
-   What's unclear: The current bootstrap still leaves that import commented, so enabling it by default is an implementation choice, not an already-validated contract. [VERIFIED: lua/story/bootstrap.lua]
-   Recommendation: Plan for an explicit decision early in 04-01. If enabled, verify it through the full headless suite and keep it low-risk by preserving the empty stub. [VERIFIED: lua/custom/plugins/init.lua] [VERIFIED: nvim --headless]
+   Resolution: Enable `{ import = 'custom.plugins' }` in `lua/story/bootstrap.lua` as part of Plan 04-01. This matches the locked Phase 4 decision that `lua/custom/plugins/` is the stable user extension path, keeps `lua/plugins` as the only shipped source, and remains low risk because `lua/custom/plugins/init.lua` already returns an empty `LazySpec`. The Phase 4 headless suite explicitly requires `custom.plugins`, so this choice is now part of the validated contract rather than an open implementation option. [VERIFIED: lua/custom/plugins/init.lua] [VERIFIED: .planning/phases/04-compatibility-and-cleanup/04-CONTEXT.md] [VERIFIED: .planning/phases/04-compatibility-and-cleanup/04-01-PLAN.md]
 
 2. **Which legacy modules need adapter work versus simple validation?**
-   What we know: `debug`, `lint`, `autopairs`, `indent_line`, and `neo-tree` are standalone optional specs, while `gitsigns` layers onto a plugin already shipped from `lua/plugins/editor.lua`. [VERIFIED: lua/kickstart/plugins/*.lua] [VERIFIED: lua/plugins/editor.lua]
-   What's unclear: Whether any of those specs depend on pre-Phase-3 assumptions that only show up when they are actually enabled. [VERIFIED: .planning/STATE.md]
-   Recommendation: Audit each legacy module individually in 04-01 and treat `gitsigns` as the highest-value merge-composition check. [VERIFIED: lua/kickstart/plugins/gitsigns.lua] [CITED: https://lazy.folke.io/spec]
+   Resolution: Treat `debug`, `lint`, `autopairs`, `indent_line`, and `neo-tree` as validation-only legacy/example specs, and give `gitsigns` the only planned adapter work by marking it as an explicit overlay with `optional = true`. That is the only legacy module that composes directly with an already-shipped plugin from `lua/plugins/editor.lua`, so it is the only case where an explicit compatibility adjustment is warranted in the plans. [VERIFIED: lua/kickstart/plugins/*.lua] [VERIFIED: lua/plugins/editor.lua] [VERIFIED: .planning/phases/04-compatibility-and-cleanup/04-01-PLAN.md] [CITED: https://lazy.folke.io/spec]
 
 ## Environment Availability
 
