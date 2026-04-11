@@ -8,8 +8,8 @@ This roadmap migrates the repo from a monolithic Kickstart-style `init.lua` to a
 
 - [x] **Phase 1: Bootstrap Skeleton** - Introduce the minimal entrypoint and module loading foundation (completed 2026-04-11)
 - [x] **Phase 2: Plugin Import Layout** - Move plugin declarations into a structured `lua/plugins` system (completed 2026-04-11)
-- [ ] **Phase 3: Core Module Extraction** - Split options, keymaps, and autocommands into dedicated modules
-- [ ] **Phase 4: Compatibility and Cleanup** - Reconcile optional modules and verify behavioral parity
+- [x] **Phase 3: Core Module Extraction** - Split options, keymaps, and autocommands into dedicated modules (completed 2026-04-11)
+- [x] **Phase 4: Compatibility and Cleanup** - Reconcile optional modules and verify behavioral parity (completed 2026-04-11)
 - [ ] **Phase 5: Documentation Refresh** - Update repo guidance to reflect the new modular architecture
 
 ## Phase Details
@@ -55,9 +55,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] `03-01-PLAN.md` — Extract always-on options and diagnostics into dedicated `lua/core/` modules while keeping runtime clipboard/bootstrap behavior in `lua/story/bootstrap.lua`
-- [ ] `03-02-PLAN.md` — Extract always-on global keymaps into `lua/core/keymaps.lua` and keep plugin-local mappings in plugin ownership
-- [ ] `03-03-PLAN.md` — Extract always-on autocmds into `lua/core/autocmds.lua` and finalize bootstrap as the explicit core-versus-runtime orchestrator
+- [x] `03-01-PLAN.md` — Extract always-on options and diagnostics into dedicated `lua/core/` modules while keeping runtime clipboard/bootstrap behavior in `lua/story/bootstrap.lua`
+- [x] `03-02-PLAN.md` — Extract always-on global keymaps into `lua/core/keymaps.lua` and keep plugin-local mappings in plugin ownership
+- [x] `03-03-PLAN.md` — Extract always-on autocmds into `lua/core/autocmds.lua` and finalize bootstrap as the explicit core-versus-runtime orchestrator
 
 ### Phase 4: Compatibility and Cleanup
 **Goal**: Ensure the new structure preserves existing behavior and that optional modules fit the new architecture cleanly.
@@ -70,9 +70,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] `04-01-PLAN.md` — Activate `custom.plugins` as the stable extension path while keeping `kickstart.plugins.*` as legacy/example opt-ins
-- [ ] `04-02-PLAN.md` — Add a reusable parity assertion module and block cleanup on interactive workflow sign-off
-- [ ] `04-03-PLAN.md` — Remove only proven duplicate bootstrap logic and finalize the post-parity startup boundaries
+- [x] `04-01-PLAN.md` — Activate `custom.plugins` as the stable extension path while keeping `kickstart.plugins.*` as legacy/example opt-ins
+- [x] `04-02-PLAN.md` — Add a reusable parity assertion module and block cleanup on interactive workflow sign-off
+- [x] `04-03-PLAN.md` — Remove only proven duplicate bootstrap logic and finalize the post-parity startup boundaries
 
 ### Phase 5: Documentation Refresh
 **Goal**: Rewrite project guidance so the repo teaches and documents the modular layout that now exists.
@@ -97,6 +97,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Bootstrap Skeleton | 3/3 | Complete | 2026-04-11 |
 | 2. Plugin Import Layout | 3/3 | Complete | 2026-04-11 |
-| 3. Core Module Extraction | 0/3 | Not started | - |
-| 4. Compatibility and Cleanup | 0/3 | Not started | - |
+| 3. Core Module Extraction | 3/3 | Complete | 2026-04-11 |
+| 4. Compatibility and Cleanup | 3/3 | Complete | 2026-04-11 |
 | 5. Documentation Refresh | 0/2 | Not started | - |
