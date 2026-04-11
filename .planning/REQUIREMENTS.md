@@ -14,7 +14,7 @@
 ### Plugin Structure
 
 - [ ] **PLUG-01**: Plugin declarations are moved out of the monolithic `init.lua` into a `lua/plugins`-style import structure
-- [ ] **PLUG-02**: Plugin specs are grouped by concern so related plugins can be found and edited without scanning the whole config
+- [x] **PLUG-02**: Plugin specs are grouped by concern so related plugins can be found and edited without scanning the whole config
 - [ ] **PLUG-03**: Existing optional plugin modules remain compatible or are migrated consistently into the new structure
 
 ### Core Config
@@ -57,7 +57,7 @@
 | BOOT-02 | Phase 1 | Complete |
 | BOOT-03 | Phase 1 | Complete |
 | PLUG-01 | Phase 2 | Pending |
-| PLUG-02 | Phase 2 | Pending |
+| PLUG-02 | Phase 2 | Complete |
 | PLUG-03 | Phase 4 | Pending |
 | CORE-01 | Phase 3 | Pending |
 | CORE-02 | Phase 3 | Pending |
