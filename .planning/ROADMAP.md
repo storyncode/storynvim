@@ -7,7 +7,7 @@ This roadmap migrates the repo from a monolithic Kickstart-style `init.lua` to a
 ## Phases
 
 - [x] **Phase 1: Bootstrap Skeleton** - Introduce the minimal entrypoint and module loading foundation (completed 2026-04-11)
-- [ ] **Phase 2: Plugin Import Layout** - Move plugin declarations into a structured `lua/plugins` system
+- [x] **Phase 2: Plugin Import Layout** - Move plugin declarations into a structured `lua/plugins` system (completed 2026-04-11)
 - [ ] **Phase 3: Core Module Extraction** - Split options, keymaps, and autocommands into dedicated modules
 - [ ] **Phase 4: Compatibility and Cleanup** - Reconcile optional modules and verify behavioral parity
 - [ ] **Phase 5: Documentation Refresh** - Update repo guidance to reflect the new modular architecture
@@ -40,9 +40,9 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] `02-01-PLAN.md` — Create the editor and Telescope concern modules under `lua/plugins/`
-- [ ] `02-02-PLAN.md` — Create the LSP, coding, and UI concern modules under `lua/plugins/`
-- [ ] `02-03-PLAN.md` — Switch `lazy.setup` to `import = 'plugins'`, remove the inline plugin table, and rerun smoke checks
+- [x] `02-01-PLAN.md` — Create the editor and Telescope concern modules under `lua/plugins/`
+- [x] `02-02-PLAN.md` — Create the LSP, coding, and UI concern modules under `lua/plugins/`
+- [x] `02-03-PLAN.md` — Switch `lazy.setup` to `import = 'plugins'`, remove the inline plugin table, and rerun smoke checks
 
 ### Phase 3: Core Module Extraction
 **Goal**: Move non-plugin editor behavior out of `init.lua` into dedicated modules with clear boundaries.
@@ -96,7 +96,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Bootstrap Skeleton | 3/3 | Complete | 2026-04-11 |
-| 2. Plugin Import Layout | 0/3 | Not started | - |
+| 2. Plugin Import Layout | 3/3 | Complete | 2026-04-11 |
 | 3. Core Module Extraction | 0/3 | Not started | - |
 | 4. Compatibility and Cleanup | 0/3 | Not started | - |
 | 5. Documentation Refresh | 0/2 | Not started | - |

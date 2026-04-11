@@ -17,10 +17,10 @@ The config must stay easy to reason about while moving from one giant startup fi
 - ✓ Includes working plugin integrations for Telescope, Treesitter, LSP, completion, formatting, and optional plugin modules under `lua/kickstart/plugins/` — existing
 - ✓ Ships with local health checks and user-facing setup documentation in `lua/kickstart/health.lua`, `README.md`, and `doc/kickstart.txt` — existing
 - ✓ Phase 1 established a thin `init.lua`, ordered bootstrap module, and dedicated lazy bootstrap helper without breaking headless startup checks — validated in Phase 1: Bootstrap Skeleton
+- ✓ Phase 2 moved shipped plugin specs into concern-based `lua/plugins` modules and switched bootstrap to `lazy.nvim` imports — validated in Phase 2: Plugin Import Layout
 
 ### Active
 
-- [ ] Move plugin registration to a `lua/plugins`-style import system so plugin specs are grouped by concern instead of embedded inline in the entrypoint
 - [ ] Split editor settings, keymaps, autocommands, and plugin-related helper logic into coherent modules with clear ownership
 - [ ] Preserve existing behavior during the migration so the refactor does not regress startup, keymaps, LSP, formatting, Telescope, or optional modules
 - [ ] Update documentation so the repo explains the modular structure instead of teaching the single-file layout
@@ -48,12 +48,12 @@ This is a brownfield Neovim configuration derived from Kickstart.nvim. The curre
 |----------|-----------|---------|
 | Treat this as a brownfield refactor rather than a greenfield rewrite | Existing config behavior already works and should be preserved | Phase 1 kept runtime behavior intact while changing structure |
 | Target a minimal `init.lua` plus modular Lua imports | This directly matches the desired end state and reduces future maintenance cost | Phase 1 delivered the thin entrypoint plus bootstrap modules |
-| Use a `lua/plugins`-style plugin import layout | It is the clearest structural replacement for the current inline plugin table | — Pending |
+| Use a `lua/plugins`-style plugin import layout | It is the clearest structural replacement for the current inline plugin table | Phase 2 completed this with concern-based modules and `spec = { { import = 'plugins' } }` |
 | Keep planning docs in git | The migration is multi-phase and benefits from persistent project memory | — Pending |
 
 ## Current State
 
-Phase 1 is complete. `init.lua` is now a thin bootstrap entrypoint, startup ordering lives in `lua/story/bootstrap.lua`, and the risky `lazy.nvim` clone/runtimepath logic is isolated in `lua/story/bootstrap/lazy.lua`. The next step is moving the inline plugin table into a `lua/plugins` import layout.
+Phases 1 and 2 are complete. `init.lua` is a thin bootstrap entrypoint, startup ordering lives in `lua/story/bootstrap.lua`, shipped plugin specs live in concern-based modules under `lua/plugins/`, and bootstrap now imports that namespace through `lazy.nvim`. The next step is Phase 3, extracting core editor behavior into dedicated modules without regressing the newly modular startup path.
 
 ## Evolution
 
@@ -73,4 +73,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-11 after Phase 1 completion*
+*Last updated: 2026-04-11 after Phase 2 completion*
