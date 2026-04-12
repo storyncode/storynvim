@@ -121,9 +121,8 @@ the current plugin status. Hit `q` to close the window.
 Start with `README.md`, then browse the module that matches what you want to
 change:
 
-- `init.lua` is a thin entrypoint that sets early globals and calls `require('story.bootstrap').setup()`
-- `lua/story/` owns startup orchestration and plugin-manager bootstrap
-- `lua/core/` owns always-on editor behavior like options, keymaps, diagnostics, and autocmds
+- `init.lua` is a thin entrypoint that sets early globals and calls `require('core.bootstrap').setup()`
+- `lua/core/` owns startup orchestration plus always-on editor behavior like options, keymaps, diagnostics, and autocmds
 - `lua/plugins/` owns shipped plugin specs and configuration
 - `lua/custom/plugins/` is the stable fork-local path for your own plugins and overrides
 
@@ -137,9 +136,8 @@ instead of treating `init.lua` as the main customization surface.
 
 ```text
 init.lua
-└── require('story.bootstrap').setup()
-    ├── lua/story/                  startup orchestration and lazy.nvim bootstrap
-    ├── lua/core/                   always-on editor behavior
+└── require('core.bootstrap').setup()
+    ├── lua/core/                   startup orchestration and always-on editor behavior
     ├── lua/plugins/                shipped plugin behavior
     ├── lua/custom/plugins/         fork-local plugins and overrides
     └── lua/kickstart/plugins/      legacy/example opt-in modules

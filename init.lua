@@ -23,7 +23,7 @@
 This file is intentionally small.
 
   `init.lua` only handles early globals and then hands off startup to:
-    `require('story.bootstrap').setup()`
+    `require('core.bootstrap').setup()`
 
 Where to change things:
 
@@ -40,8 +40,6 @@ Compatibility note:
 Useful references:
 
   - `README.md` for the current architecture and customization guide
-  - `:help kickstart.nvim` for the shipped in-editor overview
-  - `:checkhealth kickstart` if installation or environment checks fail
   - `:help lua-guide` for Neovim's Lua integration docs
   - `:Tutor` if you are still learning core Neovim motions and editing
 
@@ -58,4 +56,8 @@ vim.g.maplocalleader = ' '
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
 
-require('story.bootstrap').setup()
+local init_source = debug.getinfo(1, 'S').source:sub(2)
+local config_root = vim.fs.dirname(vim.uv.fs_realpath(init_source) or init_source)
+vim.opt.rtp:prepend(config_root)
+
+require('core.bootstrap').setup()

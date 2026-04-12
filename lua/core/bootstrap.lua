@@ -23,7 +23,7 @@ function M.setup()
   -- Plugin manager bootstrap
   -- [[ Install `lazy.nvim` plugin manager ]]
   --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
-  require('story.bootstrap.lazy').setup()
+  require('core.bootstrap.lazy').setup()
 
   -- [[ Configure and install plugins ]]
   --
