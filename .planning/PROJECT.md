@@ -8,71 +8,67 @@ This repository is a forkable Neovim configuration based on Kickstart.nvim. It n
 
 The config must stay easy to reason about while moving from one giant startup file to a clean modular structure that preserves current functionality.
 
+## Current State
+
+`v1.0` is shipped and archived. The repo now teaches the same architecture it runs: `init.lua` is a thin bootstrap entrypoint, startup ordering lives in `lua/story/bootstrap.lua`, always-on editor behavior lives in `lua/core/`, shipped plugin specs live in concern-based modules under `lua/plugins/`, `custom.plugins` is the stable extension path, and the README/help surfaces point readers at those ownership boundaries.
+
+## Next Milestone Goals
+
+- Define the next milestone with `/gsd-new-milestone`
+- Decide whether to pay down accepted `v1.0` debt first:
+  - Backfill Nyquist-compliant validation for Phases 01 and 02
+  - Remove the stale README phrase
+  - Remove the stale `lua/kickstart/plugins/gitsigns.lua` historical comment
+- Decide whether `FUT-01` and `FUT-02` should become active milestone requirements
+
 ## Requirements
 
 ### Validated
 
-- ✓ Bootstraps `lazy.nvim` and loads a working plugin-based Neovim environment from `init.lua` — existing
-- ✓ Provides modern editor defaults, keymaps, autocommands, and diagnostics behavior for daily editing — existing
-- ✓ Includes working plugin integrations for Telescope, Treesitter, LSP, completion, formatting, and optional plugin modules under `lua/kickstart/plugins/` — existing
-- ✓ Ships with local health checks and user-facing setup documentation in `lua/kickstart/health.lua`, `README.md`, and `doc/kickstart.txt` — existing
-- ✓ Phase 1 established a thin `init.lua`, ordered bootstrap module, and dedicated lazy bootstrap helper without breaking headless startup checks — validated in Phase 1: Bootstrap Skeleton
-- ✓ Phase 2 moved shipped plugin specs into concern-based `lua/plugins` modules and switched bootstrap to `lazy.nvim` imports — validated in Phase 2: Plugin Import Layout
-- ✓ Phase 3 extracted always-on editor options, keymaps, autocommands, and diagnostics into `lua/core/` modules — validated in Phase 3: Core Module Extraction
-- ✓ Phase 4 preserved parity, kept optional modules compatible, and stabilized `custom.plugins` as the fork-local extension path — validated in Phase 4: Compatibility and Cleanup
-- ✓ Phase 5 updated the README, help docs, and inline guidance to teach the modular architecture instead of the historical single-file model — validated in Phase 5: Documentation Refresh
+- ✓ Bootstraps `lazy.nvim` and loads a working plugin-based Neovim environment from `init.lua`
+- ✓ Provides modern editor defaults, keymaps, autocommands, and diagnostics behavior for daily editing
+- ✓ Includes working plugin integrations for Telescope, Treesitter, LSP, completion, formatting, and optional plugin modules under `lua/kickstart/plugins/`
+- ✓ Ships with local health checks and user-facing setup documentation in `lua/kickstart/health.lua`, `README.md`, and `doc/kickstart.txt`
+- ✓ Phase 1 established a thin `init.lua`, ordered bootstrap module, and dedicated lazy bootstrap helper without breaking headless startup checks — v1.0
+- ✓ Phase 2 moved shipped plugin specs into concern-based `lua/plugins` modules and switched bootstrap to `lazy.nvim` imports — v1.0
+- ✓ Phase 3 extracted always-on editor options, keymaps, autocommands, and diagnostics into `lua/core/` modules — v1.0
+- ✓ Phase 4 preserved parity, kept optional modules compatible, and stabilized `custom.plugins` as the fork-local extension path — v1.0
+- ✓ Phase 5 updated the README, help docs, and inline guidance to teach the modular architecture instead of the historical single-file model — v1.0
 
 ### Active
 
-None currently. Milestone v1.0 is complete.
+None. Define the next milestone before adding new active requirements.
 
 ### Out of Scope
 
-- Replacing the current plugin stack with an unrelated distribution or opinionated framework — the goal is structural refactoring, not a full product reset
-- Large feature expansion unrelated to the migration — extra plugins or workflow changes would blur whether the refactor preserved behavior
-- Cross-editor support or packaging this as a general-purpose Neovim distro — this remains a personal/forkable Neovim config
+- Replacing the current plugin stack with an unrelated distribution or opinionated framework
+- Large feature expansion unrelated to the structural migration
+- Cross-editor support or packaging this as a general-purpose Neovim distro
 
 ## Context
 
-This is a brownfield Neovim configuration derived from Kickstart.nvim. The migration finished with a cleaner module system that keeps the config understandable without drifting into a feature rewrite: `init.lua` is a thin entrypoint, `lua/story/` owns startup orchestration, `lua/core/` owns always-on editor behavior, `lua/plugins/` owns shipped plugin specs, `lua/custom/plugins/` is the stable fork-local extension path, and `lua/kickstart/plugins/` remains compatibility/example-only.
+This is a brownfield Neovim configuration derived from Kickstart.nvim. `v1.0` finished the structural migration to a modular runtime without turning the project into a feature rewrite. The next planning cycle can now decide whether to focus on validation debt, cleanup polish, or new behavior beyond the migration itself.
 
 ## Constraints
 
-- **Tech stack**: Neovim Lua config with `lazy.nvim` — the refactor should work with the existing runtime model instead of inventing a new configuration system
-- **Compatibility**: Existing behavior should remain intact — the migration should not silently break keymaps, plugin loading, or health checks
-- **Scope discipline**: Structural refactor first — plugin churn and unrelated customization should be deferred unless required to support the new layout
-- **Documentation**: Repo guidance must match reality — once the config is modular, docs cannot keep presenting the project as intentionally single-file
+- **Tech stack**: Neovim Lua config with `lazy.nvim`
+- **Compatibility**: Existing behavior should remain intact
+- **Scope discipline**: Structural clarity and maintainability still matter more than plugin churn
+- **Documentation**: Repo guidance must continue to match the shipped runtime shape
 
 ## Key Decisions
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Treat this as a brownfield refactor rather than a greenfield rewrite | Existing config behavior already works and should be preserved | Phase 1 kept runtime behavior intact while changing structure |
-| Target a minimal `init.lua` plus modular Lua imports | This directly matches the desired end state and reduces future maintenance cost | Phase 1 delivered the thin entrypoint plus bootstrap modules |
-| Use a `lua/plugins`-style plugin import layout | It is the clearest structural replacement for the current inline plugin table | Phase 2 completed this with concern-based modules and `spec = { { import = 'plugins' } }` |
-| Route documentation by ownership boundary | Once the runtime was modular, docs needed to point readers to the correct files without reviving the single-file mental model | Phase 5 aligned `README.md`, `doc/kickstart.txt`, and inline comments around `lua/core/`, `lua/plugins/`, and `lua/custom/plugins/` |
-| Keep planning docs in git | The migration is multi-phase and benefits from persistent project memory | — Pending |
+| Treat this as a brownfield refactor rather than a greenfield rewrite | Existing config behavior already works and should be preserved | ✓ Good |
+| Target a minimal `init.lua` plus modular Lua imports | This directly matched the desired end state and reduced future maintenance cost | ✓ Good |
+| Use a `lua/plugins`-style plugin import layout | It was the clearest structural replacement for the inline plugin table | ✓ Good |
+| Route documentation by ownership boundary | Once the runtime became modular, docs needed to point readers to the correct files | ✓ Good |
+| Keep planning docs in git | The migration benefited from persistent project memory across phases | ✓ Good |
 
-## Current State
+## Milestone History
 
-Phases 1 through 5 are complete. The repo now teaches the same architecture it runs: `init.lua` is a thin bootstrap entrypoint, startup ordering lives in `lua/story/bootstrap.lua`, always-on editor behavior lives in `lua/core/`, shipped plugin specs live in concern-based modules under `lua/plugins/`, `custom.plugins` is the stable extension path, and the README/help surfaces point readers at those ownership boundaries.
-
-## Evolution
-
-This document evolves at phase transitions and milestone boundaries.
-
-**After each phase transition** (via `/gsd-transition`):
-1. Requirements invalidated? → Move to Out of Scope with reason
-2. Requirements validated? → Move to Validated with phase reference
-3. New requirements emerged? → Add to Active
-4. Decisions to log? → Add to Key Decisions
-5. "What This Is" still accurate? → Update if drifted
-
-**After each milestone** (via `/gsd-complete-milestone`):
-1. Full review of all sections
-2. Core Value check — still the right priority?
-3. Audit Out of Scope — reasons still valid?
-4. Update Context with current state
+- `v1.0` shipped on 2026-04-12. See [v1.0-ROADMAP.md](/Users/danieldavies/dev/nvim/storynvim/.planning/milestones/v1.0-ROADMAP.md:1) and [v1.0-REQUIREMENTS.md](/Users/danieldavies/dev/nvim/storynvim/.planning/milestones/v1.0-REQUIREMENTS.md:1).
 
 ---
-*Last updated: 2026-04-11 after Phase 5 completion*
+*Last updated: 2026-04-12 after v1.0 milestone completion*
