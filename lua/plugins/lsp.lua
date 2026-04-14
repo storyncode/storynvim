@@ -16,6 +16,8 @@ return {
         ---@diagnostic disable-next-line: missing-fields
         opts = {},
       },
+      -- Keeps Mason package-name mapping available while Neovim handles LSP setup natively.
+      'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
@@ -170,14 +172,18 @@ return {
       --    :Mason
       --
       -- You can press `g?` for help in this menu.
-      local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
+      require('mason-lspconfig').setup {
+        ensure_installed = vim.tbl_keys(servers),
+        automatic_enable = false,
+      }
+
+      local ensure_installed = {
         'gofumpt',
         'goimports',
         'golangci-lint',
         'markdownlint',
         'stylua',
-      })
+      }
 
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
