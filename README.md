@@ -28,6 +28,11 @@ below the latest
 your chosen install method only gives you an outdated version of neovim, find
 alternative [installation methods below](#alternative-neovim-installation-methods).
 
+This fork's LSP setup uses Neovim's native 0.12 APIs (`vim.lsp.config()` and
+`vim.lsp.enable()`) instead of the deprecated `require('lspconfig').*.setup {}`
+path. `nvim-lspconfig` is still kept as the source of maintained server
+definitions.
+
 ### Install External Dependencies
 
 External Requirements:
