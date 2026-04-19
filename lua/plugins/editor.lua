@@ -77,16 +77,16 @@ return {
       legacy_commands = false, -- this will be removed in the next major release
       workspaces = {
         {
-          name = 'pop',
-          path = '~/vaults/price-of-power',
-        },
-        {
           name = 'personal',
           path = '~/vaults/personal',
         },
         {
           name = 'work',
           path = '~/vaults/work',
+        },
+        {
+          name = 'pop',
+          path = '~/vaults/price-of-power',
         },
       },
       templates = {
@@ -96,6 +96,12 @@ return {
         customizations = {
           sessions = {
             notes_subdir = 'sessions',
+          },
+          daily = {
+            notes_subdir = 'daily',
+          },
+          meeting = {
+            notes_subdir = 'meetings',
           },
         },
       },
