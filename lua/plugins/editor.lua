@@ -90,7 +90,7 @@ return {
         },
       },
       templates = {
-        folder = 'ZZZ_Template',
+        folder = 'ZZZ_Templates',
         date_format = '%Y-%m-%d-%a',
         time_format = '%H:%M',
         customizations = {
