@@ -27,6 +27,7 @@ function M.setup()
   vim.o.confirm = true
   vim.o.tabstop = 2
   vim.o.shiftwidth = 2
+  vim.o.cole = 1
 end
 
 return M
