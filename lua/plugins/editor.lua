@@ -105,6 +105,9 @@ return {
           },
         },
       },
+      sync = {
+        enabled = true,
+      },
     },
   },
 }
