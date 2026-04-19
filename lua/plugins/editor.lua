@@ -79,7 +79,7 @@ return {
       workspaces = {
         {
           name = 'pop',
-          path = '~/vaults/priceofpower',
+          path = '~/vaults/price-of-power',
         },
       },
     },
