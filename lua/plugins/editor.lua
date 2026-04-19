@@ -69,7 +69,6 @@ return {
     },
   },
   {
-
     'obsidian-nvim/obsidian.nvim',
     version = '*', -- use latest release, remove to use latest commit
     ---@module 'obsidian'
@@ -81,6 +80,33 @@ return {
           name = 'pop',
           path = '~/vaults/price-of-power',
         },
+        {
+          name = 'personal',
+          path = '~/vaults/personal',
+        },
+        {
+          name = 'work',
+          path = '~/vaults/work',
+        },
+      },
+      templates = {
+        folder = 'ZZZ_Template',
+        date_format = '%Y-%m-%d-%a',
+        time_format = '%H:%M',
+        substitutions = {
+          yesterday = function(ctx)
+            if vim.endswith(ctx.template_name, "Weekly Note Template.md") then
+              return os.date"%Y-%m-%d", os.time() - 86400 * 7)
+            end
+            return os.date('%Y-%m-%d', os.time() - 86400) 
+          end,
+        },
+        customizations = {
+          sessions = {
+            notes_subdir = "sessions"
+          },
+          
+        }
       },
     },
   },
