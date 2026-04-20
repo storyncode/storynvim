@@ -17,7 +17,7 @@ return {
       'MunifTanjim/nui.nvim',
     },
     keys = {
-      { '<leader>El', '<cmd>Neotree filesystem reveal left<cr>', desc = '[E]xplorer open [l]eft', silent = true },
+      { '<leader>El', '<cmd>Neotree toggle filesystem reveal left<cr>', desc = '[E]xplorer open [l]eft', silent = true },
     },
   },
 }
