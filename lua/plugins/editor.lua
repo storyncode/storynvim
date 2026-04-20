@@ -107,6 +107,9 @@ return {
           meeting = {
             notes_subdir = 'meetings',
           },
+          character = {
+            notes_subdir = 'characters',
+          },
         },
       },
       sync = {
