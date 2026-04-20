@@ -88,6 +88,10 @@ return {
           name = 'pop',
           path = '~/vaults/price-of-power',
         },
+        {
+          name = 'cc',
+          path = '~/vaults/cc',
+        },
       },
       templates = {
         folder = 'ZZZ_Templates',
