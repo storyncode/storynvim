@@ -34,6 +34,29 @@ local function create_pop_day_note(bufnr)
   obsidian.actions.new_from_template(('Days/%s/%s'):format(subdir, day_name), 'Day')
 end
 
+local function resolve_obsidian_workspace()
+  local obsidian = require 'obsidian'
+  local bufname = vim.api.nvim_buf_get_name(0)
+  local workspace = nil
+
+  if bufname ~= '' then workspace = obsidian.api.find_workspace(bufname) end
+  if not workspace then workspace = obsidian.Workspace.find(vim.fn.getcwd(), Obsidian.workspaces) end
+
+  return obsidian, workspace
+end
+
+local function with_resolved_workspace(callback)
+  local obsidian, workspace = resolve_obsidian_workspace()
+  if not workspace then
+    vim.notify('No configured Obsidian workspace found for current buffer or cwd', vim.log.levels.WARN)
+    return
+  end
+
+  if not Obsidian.workspace or Obsidian.workspace.name ~= workspace.name then obsidian.Workspace.set(workspace) end
+
+  callback(obsidian, workspace)
+end
+
 ---@module 'lazy'
 ---@type LazySpec
 return {
@@ -104,6 +127,9 @@ return {
         { 'gr', group = 'LSP Actions', mode = { 'n' } },
       },
     },
+    init = function()
+      vim.keymap.set('n', '<leader>O', '<Nop>', { desc = '[O]bsidian' })
+    end,
   },
   {
     'obsidian-nvim/obsidian.nvim',
@@ -201,55 +227,46 @@ return {
         date_format = '%Y-%m-%d-%a',
         time_format = '%H:%M',
       },
-      callbacks = {
-        enter_note = function(note)
-          local obsidian = require 'obsidian'
-          local bufnr = vim.api.nvim_get_current_buf()
-          local workspace = note and obsidian.api.find_workspace(tostring(note.path)) or nil
-
-          vim.keymap.set('n', '<leader>Od', '<cmd>Obsidian today<cr>', {
-            buffer = bufnr,
-            desc = '[O]bsidian [D]aily note',
-          })
-
-          vim.keymap.set('n', '<leader>Ot', '<cmd>Obsidian new_from_template<cr>', {
-            buffer = bufnr,
-            desc = '[O]bsidian note from [t]emplate',
-          })
-
-          vim.keymap.set('n', '<leader>OW', '<cmd>Obsidian workspace<cr>', {
-            buffer = bufnr,
-            desc = '[O]bsidian [W]orkspace',
-          })
-
-          if workspace and workspace.name == 'work' then
-            vim.keymap.set('n', '<leader>Om', function()
-              obsidian.actions.new_from_template(nil, 'meeting')
-            end, {
-              buffer = bufnr,
-              desc = '[O]bsidian [m]eeting',
-            })
-          end
-
-          if workspace and workspace.name == 'pop' then
-            if not vim.b[bufnr].obsidian_pop_day_bound then
-              vim.api.nvim_buf_create_user_command(
-                bufnr,
-                'ObsidianNewDay',
-                function() create_pop_day_note(bufnr) end,
-                { desc = 'Create a Price of Power day note' }
-              )
-              vim.b[bufnr].obsidian_pop_day_bound = true
-            end
-
-            vim.keymap.set('n', '<leader>OD', function() create_pop_day_note(bufnr) end, { buffer = bufnr, desc = '[O]bsidian [D]ay note' })
-          end
-        end,
-      },
       sync = {
         enabled = true,
       },
     },
-    config = function(_, opts) require('obsidian').setup(opts) end,
+    config = function(_, opts)
+      require('obsidian').setup(opts)
+
+      vim.keymap.set('n', '<leader>Od', function()
+        with_resolved_workspace(function() vim.cmd 'Obsidian today' end)
+      end, { desc = '[O]bsidian [D]aily note' })
+
+      vim.keymap.set('n', '<leader>Ot', function()
+        with_resolved_workspace(function() vim.cmd 'Obsidian new_from_template' end)
+      end, { desc = '[O]bsidian note from [t]emplate' })
+
+      vim.keymap.set('n', '<leader>OW', '<cmd>Obsidian workspace<cr>', {
+        desc = '[O]bsidian [W]orkspace',
+      })
+
+      vim.keymap.set('n', '<leader>Om', function()
+        with_resolved_workspace(function(obsidian, workspace)
+          if workspace.name ~= 'work' then
+            vim.notify('Meeting template is only configured for the work vault', vim.log.levels.WARN)
+            return
+          end
+
+          obsidian.actions.new_from_template(nil, 'meeting')
+        end)
+      end, { desc = '[O]bsidian [m]eeting' })
+
+      vim.keymap.set('n', '<leader>OD', function()
+        with_resolved_workspace(function(_, workspace)
+          if workspace.name ~= 'pop' then
+            vim.notify('Day note helper is only configured for the Price of Power vault', vim.log.levels.WARN)
+            return
+          end
+
+          create_pop_day_note(0)
+        end)
+      end, { desc = '[O]bsidian [D]ay note' })
+    end,
   },
 }
