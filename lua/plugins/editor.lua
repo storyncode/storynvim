@@ -99,7 +99,7 @@ return {
       spec = {
         { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
         { '<leader>t', group = '[T]oggle' },
-        { '<leader>o', group = '[O]bsidian' },
+        { '<leader>O', group = '[O]bsidian' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } }, -- Enable gitsigns recommended keymaps first
         { 'gr', group = 'LSP Actions', mode = { 'n' } },
       },
@@ -207,20 +207,29 @@ return {
           local bufnr = vim.api.nvim_get_current_buf()
           local workspace = note and obsidian.api.find_workspace(tostring(note.path)) or nil
 
-          vim.keymap.set('n', '<leader>od', '<cmd>Obsidian today<cr>', {
+          vim.keymap.set('n', '<leader>Od', '<cmd>Obsidian today<cr>', {
             buffer = bufnr,
             desc = '[O]bsidian [D]aily note',
           })
 
-          vim.keymap.set('n', '<leader>ot', '<cmd>Obsidian new_from_template<cr>', {
+          vim.keymap.set('n', '<leader>Ot', '<cmd>Obsidian new_from_template<cr>', {
             buffer = bufnr,
-            desc = '[O]bsidian note from [T]emplate',
+            desc = '[O]bsidian note from [t]emplate',
           })
 
-          vim.keymap.set('n', '<leader>oW', '<cmd>Obsidian workspace<cr>', {
+          vim.keymap.set('n', '<leader>OW', '<cmd>Obsidian workspace<cr>', {
             buffer = bufnr,
             desc = '[O]bsidian [W]orkspace',
           })
+
+          if workspace and workspace.name == 'work' then
+            vim.keymap.set('n', '<leader>Om', function()
+              obsidian.actions.new_from_template(nil, 'meeting')
+            end, {
+              buffer = bufnr,
+              desc = '[O]bsidian [m]eeting',
+            })
+          end
 
           if workspace and workspace.name == 'pop' then
             if not vim.b[bufnr].obsidian_pop_day_bound then
@@ -233,7 +242,7 @@ return {
               vim.b[bufnr].obsidian_pop_day_bound = true
             end
 
-            vim.keymap.set('n', '<leader>oD', function() create_pop_day_note(bufnr) end, { buffer = bufnr, desc = '[O]bsidian [D]ay note' })
+            vim.keymap.set('n', '<leader>OD', function() create_pop_day_note(bufnr) end, { buffer = bufnr, desc = '[O]bsidian [D]ay note' })
           end
         end,
       },

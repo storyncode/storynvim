@@ -2,3 +2,4 @@ WRN 2026-04-20T21:16:14.913 ?.15290    server_start:197: Failed to start server:
 WRN 2026-04-20T21:24:41.611 ?.16114    server_start:197: Failed to start server: operation not permitted: /var/folders/0z/_v429qwd0fnd5hhgptm0v7yc0000gn/T/nvim.danieldavies/aExG1Y/nvim.16114.0
 WRN 2026-04-20T21:27:53.776 ?.19277    server_start:197: Failed to start server: operation not permitted: /var/folders/0z/_v429qwd0fnd5hhgptm0v7yc0000gn/T/nvim.danieldavies/HxxqfM/nvim.19277.0
 WRN 2026-04-20T21:41:07.695 ?.21666    server_start:197: Failed to start server: operation not permitted: /var/folders/0z/_v429qwd0fnd5hhgptm0v7yc0000gn/T/nvim.danieldavies/OUFY5Q/nvim.21666.0
+WRN 2026-04-20T22:05:03.525 ?.24921    server_start:197: Failed to start server: operation not permitted: /var/folders/0z/_v429qwd0fnd5hhgptm0v7yc0000gn/T/nvim.danieldavies/Nkwe1L/nvim.24921.0
