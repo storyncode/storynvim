@@ -122,13 +122,13 @@ return {
       spec = {
         { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
         { '<leader>t', group = '[T]oggle' },
-        { '<leader>O', group = '[O]bsidian' },
+        { '<leader>o', group = '[O]bsidian' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } }, -- Enable gitsigns recommended keymaps first
         { 'gr', group = 'LSP Actions', mode = { 'n' } },
       },
     },
     init = function()
-      vim.keymap.set('n', '<leader>O', '<Nop>', { desc = '[O]bsidian' })
+      vim.keymap.set('n', '<leader>o', '<Nop>', { desc = '[O]bsidian' })
     end,
   },
   {
@@ -242,19 +242,19 @@ return {
     config = function(_, opts)
       require('obsidian').setup(opts)
 
-      vim.keymap.set('n', '<leader>Od', function()
+      vim.keymap.set('n', '<leader>od', function()
         with_resolved_workspace(function() vim.cmd 'Obsidian today' end)
       end, { desc = '[O]bsidian [D]aily note' })
 
-      vim.keymap.set('n', '<leader>Ot', function()
+      vim.keymap.set('n', '<leader>ot', function()
         with_resolved_workspace(function() vim.cmd 'Obsidian new_from_template' end)
       end, { desc = '[O]bsidian note from [t]emplate' })
 
-      vim.keymap.set('n', '<leader>OW', '<cmd>Obsidian workspace<cr>', {
+      vim.keymap.set('n', '<leader>oW', '<cmd>Obsidian workspace<cr>', {
         desc = '[O]bsidian [W]orkspace',
       })
 
-      vim.keymap.set('n', '<leader>Om', function()
+      vim.keymap.set('n', '<leader>om', function()
         with_resolved_workspace(function(obsidian, workspace)
           if workspace.name ~= 'work' then
             vim.notify('Meeting template is only configured for the work vault', vim.log.levels.WARN)
@@ -265,7 +265,7 @@ return {
         end)
       end, { desc = '[O]bsidian [m]eeting' })
 
-      vim.keymap.set('n', '<leader>OD', function()
+      vim.keymap.set('n', '<leader>oD', function()
         with_resolved_workspace(function(_, workspace)
           if workspace.name ~= 'pop' then
             vim.notify('Day note helper is only configured for the Price of Power vault', vim.log.levels.WARN)
