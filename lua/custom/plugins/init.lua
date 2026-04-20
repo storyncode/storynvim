@@ -7,4 +7,17 @@
 
 ---@module 'lazy'
 ---@type LazySpec
-return {}
+return {
+  {
+    'nvim-neo-tree/neo-tree.nvim',
+    version = '*',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons',
+      'MunifTanjim/nui.nvim',
+    },
+    keys = {
+      { '<leader>El', '<cmd>Neotree filesystem reveal left<cr>', desc = '[E]xplorer open [l]eft', silent = true },
+    },
+  },
+}

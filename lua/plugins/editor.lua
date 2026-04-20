@@ -2,14 +2,10 @@ local pop_root = vim.fs.normalize(vim.fn.expand '~/vaults/price-of-power')
 
 local function prompt_input(prompt, default)
   local ok, value = pcall(vim.fn.input, { prompt = prompt, default = default or '', completion = 'file' })
-  if not ok then
-    return nil
-  end
+  if not ok then return nil end
 
   value = vim.trim(value)
-  if value == '' then
-    return nil
-  end
+  if value == '' then return nil end
 
   return value
 end
@@ -17,15 +13,11 @@ end
 local function get_day_subdir_default(bufname)
   local normalized = vim.fs.normalize(bufname)
   local prefix = pop_root .. '/Days/'
-  if not vim.startswith(normalized, prefix) then
-    return ''
-  end
+  if not vim.startswith(normalized, prefix) then return '' end
 
   local relative = normalized:sub(#prefix + 1)
   local parent = vim.fs.dirname(relative)
-  if parent == '.' then
-    return ''
-  end
+  if parent == '.' then return '' end
 
   return parent
 end
@@ -34,14 +26,10 @@ local function create_pop_day_note(bufnr)
   local obsidian = require 'obsidian'
   local bufname = vim.api.nvim_buf_get_name(bufnr)
   local subdir = prompt_input('Day subdirectory under Days: ', get_day_subdir_default(bufname))
-  if not subdir then
-    return
-  end
+  if not subdir then return end
 
   local day_name = prompt_input('Day note name: ', 'Day ')
-  if not day_name then
-    return
-  end
+  if not day_name then return end
 
   obsidian.actions.new_from_template(('Days/%s/%s'):format(subdir, day_name), 'Day')
 end
@@ -219,7 +207,7 @@ return {
           local bufnr = vim.api.nvim_get_current_buf()
           local workspace = note and obsidian.api.find_workspace(tostring(note.path)) or nil
 
-          vim.keymap.set('n', '<leader>oD', '<cmd>Obsidian today<cr>', {
+          vim.keymap.set('n', '<leader>od', '<cmd>Obsidian today<cr>', {
             buffer = bufnr,
             desc = '[O]bsidian [D]aily note',
           })
@@ -236,15 +224,16 @@ return {
 
           if workspace and workspace.name == 'pop' then
             if not vim.b[bufnr].obsidian_pop_day_bound then
-              vim.api.nvim_buf_create_user_command(bufnr, 'ObsidianNewDay', function()
-                create_pop_day_note(bufnr)
-              end, { desc = 'Create a Price of Power day note' })
+              vim.api.nvim_buf_create_user_command(
+                bufnr,
+                'ObsidianNewDay',
+                function() create_pop_day_note(bufnr) end,
+                { desc = 'Create a Price of Power day note' }
+              )
               vim.b[bufnr].obsidian_pop_day_bound = true
             end
 
-            vim.keymap.set('n', '<leader>od', function()
-              create_pop_day_note(bufnr)
-            end, { buffer = bufnr, desc = '[O]bsidian [D]ay note' })
+            vim.keymap.set('n', '<leader>oD', function() create_pop_day_note(bufnr) end, { buffer = bufnr, desc = '[O]bsidian [D]ay note' })
           end
         end,
       },
@@ -252,8 +241,6 @@ return {
         enabled = true,
       },
     },
-    config = function(_, opts)
-      require('obsidian').setup(opts)
-    end,
+    config = function(_, opts) require('obsidian').setup(opts) end,
   },
 }
