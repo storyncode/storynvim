@@ -143,6 +143,10 @@ return {
           name = 'personal',
           path = '~/vaults/personal',
           overrides = {
+            daily_notes = {
+              folder = 'daily',
+              template = 'daily',
+            },
             templates = {
               customizations = {
                 daily = {
@@ -156,6 +160,10 @@ return {
           name = 'work',
           path = '~/vaults/work',
           overrides = {
+            daily_notes = {
+              folder = 'daily',
+              template = 'daily',
+            },
             templates = {
               customizations = {
                 daily = {
