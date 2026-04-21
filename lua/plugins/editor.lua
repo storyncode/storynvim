@@ -127,9 +127,7 @@ return {
         { 'gr', group = 'LSP Actions', mode = { 'n' } },
       },
     },
-    init = function()
-      vim.keymap.set('n', '<leader>o', '<Nop>', { desc = '[O]bsidian' })
-    end,
+    init = function() vim.keymap.set('n', '<leader>o', '<Nop>', { desc = '[O]bsidian' }) end,
   },
   {
     'obsidian-nvim/obsidian.nvim',
@@ -171,6 +169,12 @@ return {
                 },
                 meeting = {
                   notes_subdir = 'meetings',
+                },
+                employee = {
+                  notes_subdir = 'employees',
+                },
+                investigation = {
+                  notes_subdir = 'investionations',
                 },
               },
             },
