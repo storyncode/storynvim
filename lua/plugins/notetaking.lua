@@ -107,6 +107,9 @@ return {
                 investigation = {
                   notes_subdir = 'investionations',
                 },
+                release = {
+                  notes_subdir = 'releases',
+                },
               },
             },
           },
