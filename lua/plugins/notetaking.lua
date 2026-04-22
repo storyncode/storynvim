@@ -84,7 +84,7 @@ return {
                 project = {
                   notes_subdir = 'projects',
                 },
-                ideas = {
+                idea = {
                   notes_subdir = 'ideas',
                 },
               },
