@@ -38,12 +38,7 @@ function M.setup()
   require('lazy').setup({
     spec = {
       { import = 'plugins' },
-      { import = 'custom.plugins' },
     },
-
-    -- NOTE: `lua/custom/plugins/*.lua` is the stable user extension path for adding your own plugins,
-    -- configuration, and overrides without changing the shipped `lua/plugins` source of truth.
-    --
     -- NOTE: `lua/kickstart/plugins/*.lua` remains a legacy/example opt-in surface from the Kickstart repo.
     --
     -- require 'kickstart.plugins.debug',

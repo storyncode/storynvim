@@ -3,6 +3,19 @@
 return {
   { 'NMAC427/guess-indent.nvim', opts = {} },
 
+  {
+    'nvim-neo-tree/neo-tree.nvim',
+    version = '*',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons',
+      'MunifTanjim/nui.nvim',
+    },
+    keys = {
+      { '<leader>el', '<cmd>Neotree toggle filesystem reveal left<cr>', desc = '[E]xplorer open [l]eft', silent = true },
+    },
+  },
+
   -- Alternatively, use `config = function() ... end` for full control over the configuration.
   -- If you prefer to call `setup` explicitly, use:
   --    {
