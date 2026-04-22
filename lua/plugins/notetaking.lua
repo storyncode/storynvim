@@ -81,6 +81,9 @@ return {
                 daily = {
                   notes_subdir = 'daily',
                 },
+                project = {
+                  notes_subdir = 'projects',
+                },
               },
             },
           },
