@@ -173,6 +173,25 @@ return {
             },
           },
         },
+        {
+          name = 'scratchpad',
+          path = '~/vaults/scratch',
+          overrides = {
+            templates = {
+              customizations = {
+                daily = {
+                  notes_subdir = 'daily',
+                },
+                idea = {
+                  notes_subdir = 'ideas',
+                },
+                project = {
+                  notes_subdir = 'projects',
+                },
+              },
+            },
+          },
+        },
       },
       templates = {
         folder = 'ZZZ_Templates',
