@@ -10,6 +10,8 @@ function M.setup()
 
   vim.o.ignorecase = true
   vim.o.smartcase = true
+  vim.o.wrap = true
+  vim.o.linebreak = true
 
   vim.o.signcolumn = 'yes'
   vim.o.updatetime = 250
