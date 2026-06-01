@@ -207,6 +207,12 @@ return {
                 creature = {
                   notes_subdir = 'Creatures',
                 },
+                organisation = {
+                  notes_subdir = 'Organisations',
+                },
+                location = {
+                  notes_subdir = 'Locations',
+                },
               },
             },
           },
