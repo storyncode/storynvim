@@ -228,9 +228,13 @@ return {
         with_resolved_workspace(function() vim.cmd 'Obsidian today' end)
       end, { desc = '[O]bsidian [D]aily note' })
 
-      vim.keymap.set('n', '<leader>ot', function()
+      vim.keymap.set('n', '<leader>oT', function()
         with_resolved_workspace(function() vim.cmd 'Obsidian new_from_template' end)
-      end, { desc = '[O]bsidian note from [t]emplate' })
+      end, { desc = '[O]bsidian note from [T]emplate' })
+
+      vim.keymap.set('n', '<leader>ot', function()
+        with_resolved_workspace(function() vim.cmd 'Obsidian template' end)
+      end, { desc = '[O]bsidian apply [t]emplate' })
 
       vim.keymap.set('n', '<leader>oW', '<cmd>Obsidian workspace<cr>', {
         desc = '[O]bsidian [W]orkspace',
