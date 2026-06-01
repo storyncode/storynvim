@@ -193,6 +193,25 @@ return {
           },
         },
       },
+      {
+        name = 'hellbreakers',
+        path = '~/vaults/hellbreakers',
+        overrides = {
+          customizations = {
+            templates = {
+              session = {
+                notes_subdir = 'Session',
+              },
+              player_character = {
+                notes_subdir = 'Player Characters',
+              },
+              creature = {
+                notes_subdir = 'Creatures',
+              },
+            },
+          },
+        },
+      },
       templates = {
         folder = 'ZZZ_Templates',
         date_format = '%Y-%m-%d-%a',
